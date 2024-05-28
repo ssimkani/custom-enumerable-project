@@ -27,6 +27,22 @@ module Enumerable
     end
     for_all
   end
+
+  def my_any?
+    for_any = false
+    each_with_index do |element, index|
+      if block_given?
+        if yield element
+          for_any = true
+          break
+        end
+      elsif self[index]
+        for_any = true
+        break
+      end
+    end
+    for_any
+  end
 end
 
 # You will first have to define my_each
