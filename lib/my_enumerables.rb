@@ -11,7 +11,7 @@ module Enumerable
 
   def my_select
     arr = []
-    each do |element|
+    my_each do |element|
       arr << element if yield element
     end
     arr
@@ -19,7 +19,7 @@ module Enumerable
 
   def my_all?
     for_all = true
-    each_with_index do |element, index|
+    my_each_with_index do |element, index|
       if block_given?
         unless yield element
           for_all = false
@@ -37,7 +37,7 @@ module Enumerable
 
   def my_any?
     for_any = false
-    each_with_index do |element, index|
+    my_each_with_index do |element, index|
       if block_given?
         if yield element
           for_any = true
@@ -49,6 +49,22 @@ module Enumerable
       end
     end
     for_any
+  end
+
+  def my_none?
+    none = true
+    my_each_with_index do |element, index|
+      if block_given?
+        if yield element
+          none = false
+          break
+        end
+      elsif self[index]
+        none = false
+        break
+      end
+    end
+    none
   end
 end
 
