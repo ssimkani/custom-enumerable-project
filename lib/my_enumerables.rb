@@ -82,7 +82,16 @@ module Enumerable
     end
     counter
   end
-end
+
+  def my_map
+    arr = []
+    my_each do |element|
+      return to_enum(:my_map) unless block_given?
+
+      arr << yield(element)
+    end
+    arr
+  end
 
 # You will first have to define my_each
 # on the Array class. Methods defined in
