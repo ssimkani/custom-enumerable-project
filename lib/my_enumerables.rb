@@ -66,6 +66,22 @@ module Enumerable
     end
     none
   end
+
+  def my_count(obj = nil)
+    counter = 0
+    my_each do |element|
+      if obj.nil?
+        if block_given?
+          counter += 1 if yield element
+        else
+          counter += 1
+        end
+      elsif include?(obj)
+        counter += 1
+      end
+    end
+    counter
+  end
 end
 
 # You will first have to define my_each
