@@ -1,5 +1,13 @@
 module Enumerable
   # Your code goes here
+  def my_each_with_index
+    counter = 0
+    length.times do
+      yield self[counter], counter
+      counter += 1
+    end
+    self
+  end
 end
 
 # You will first have to define my_each
