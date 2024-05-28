@@ -8,4 +8,12 @@ end
 # to this method
 class Array
   # Define my_each here
+  def my_each
+    counter = 0
+    length.times do
+      yield self[counter]
+      counter += 1
+    end
+    self
+  end
 end
