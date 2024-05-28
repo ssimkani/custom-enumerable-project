@@ -19,10 +19,17 @@ module Enumerable
 
   def my_all?
     for_all = true
-    each do |element|
-      unless yield element
-        for_all = false
-        break
+    each_with_index do |element, index|
+      if block_given?
+        unless yield element
+          for_all = false
+          break
+        end
+      else
+        unless self[index]
+          for_all = false
+          break
+        end
       end
     end
     for_all
