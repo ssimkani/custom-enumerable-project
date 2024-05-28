@@ -8,6 +8,25 @@ module Enumerable
     end
     self
   end
+
+  def my_select
+    arr = []
+    each do |element|
+      arr << element if yield element
+    end
+    arr
+  end
+
+  def my_all?
+    for_all = true
+    each do |element|
+      unless yield element
+        for_all = false
+        break
+      end
+    end
+    for_all
+  end
 end
 
 # You will first have to define my_each
